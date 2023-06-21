@@ -27,7 +27,7 @@ class SearchVC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true // so that "title" will not appear after going back
+        navigationController?.setNavigationBarHidden(true, animated: true)  // so that "title" will not appear after going back
     }
 
     
