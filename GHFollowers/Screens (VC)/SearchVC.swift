@@ -29,6 +29,11 @@ class SearchVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)  // so that "title" will not appear after going back
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+    }
 
     
     func createDismissKeyboardGesture() {

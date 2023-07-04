@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		321A93602A43C055004667A0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A935F2A43C055004667A0 /* NetworkManager.swift */; };
+		321A93622A43C07D004667A0 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A93612A43C07D004667A0 /* Follower.swift */; };
+		321A93642A43C08D004667A0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A93632A43C08D004667A0 /* User.swift */; };
+		321A93672A43C0BC004667A0 /* GFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A93662A43C0BC004667A0 /* GFError.swift */; };
+		321A936A2A43C132004667A0 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A93692A43C132004667A0 /* FollowerCell.swift */; };
+		321A936C2A43C1E8004667A0 /* GHAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A936B2A43C1E8004667A0 /* GHAvatarImageView.swift */; };
 		325EE9632A423843000F342D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325EE9622A423843000F342D /* AppDelegate.swift */; };
 		325EE9652A423843000F342D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325EE9642A423843000F342D /* SceneDelegate.swift */; };
 		325EE96C2A423844000F342D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 325EE96B2A423844000F342D /* Assets.xcassets */; };
@@ -22,9 +28,16 @@
 		325EE9872A428887000F342D /* GFAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325EE9862A428887000F342D /* GFAlertVC.swift */; };
 		325EE9892A429158000F342D /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325EE9882A429158000F342D /* UIViewController+Ext.swift */; };
 		325EE9952A435732000F342D /* GFContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325EE9942A435732000F342D /* GFContainerView.swift */; };
+		32B0B8432A44838B00D69797 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B0B8422A44838B00D69797 /* UIHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		321A935F2A43C055004667A0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		321A93612A43C07D004667A0 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
+		321A93632A43C08D004667A0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		321A93662A43C0BC004667A0 /* GFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFError.swift; sourceTree = "<group>"; };
+		321A93692A43C132004667A0 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
+		321A936B2A43C1E8004667A0 /* GHAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHAvatarImageView.swift; sourceTree = "<group>"; };
 		325EE95F2A423843000F342D /* GHFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		325EE9622A423843000F342D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		325EE9642A423843000F342D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +55,7 @@
 		325EE9862A428887000F342D /* GFAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlertVC.swift; sourceTree = "<group>"; };
 		325EE9882A429158000F342D /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		325EE9942A435732000F342D /* GFContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFContainerView.swift; sourceTree = "<group>"; };
+		32B0B8422A44838B00D69797 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +69,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		321A93572A43BFA1004667A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				321A93612A43C07D004667A0 /* Follower.swift */,
+				321A93632A43C08D004667A0 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		321A935C2A43BFF0004667A0 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				321A935F2A43C055004667A0 /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		321A93652A43C0AB004667A0 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				321A93662A43C0BC004667A0 /* GFError.swift */,
+				32B0B8422A44838B00D69797 /* UIHelper.swift */,
+			);
+			name = Utilities;
+			path = Model/Utilities;
+			sourceTree = "<group>";
+		};
+		321A93682A43C0D2004667A0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				321A93692A43C132004667A0 /* FollowerCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		325EE9562A423843000F342D = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +123,9 @@
 		325EE9612A423843000F342D /* GHFollowers */ = {
 			isa = PBXGroup;
 			children = (
+				321A93652A43C0AB004667A0 /* Utilities */,
+				321A935C2A43BFF0004667A0 /* Managers */,
+				321A93572A43BFA1004667A0 /* Model */,
 				325EE98B2A42A18E000F342D /* Custom Views */,
 				325EE98A2A42A15C000F342D /* Screens (VC) */,
 				325EE98C2A42A1D7000F342D /* Extensions */,
@@ -96,12 +148,14 @@
 		325EE98B2A42A18E000F342D /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				321A93682A43C0D2004667A0 /* Cells */,
 				325EE98D2A42A21E000F342D /* View Controllers */,
 				325EE9942A435732000F342D /* GFContainerView.swift */,
 				325EE97C2A4246BB000F342D /* GFButton.swift */,
 				325EE97E2A424A2E000F342D /* GFTextField.swift */,
 				325EE9822A428524000F342D /* GFTitleLabel.swift */,
 				325EE9842A428786000F342D /* GFBodyLabel.swift */,
+				321A936B2A43C1E8004667A0 /* GHAvatarImageView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -204,13 +258,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				321A93672A43C0BC004667A0 /* GFError.swift in Sources */,
 				325EE9792A423F27000F342D /* FavoritesListVC.swift in Sources */,
+				321A93622A43C07D004667A0 /* Follower.swift in Sources */,
+				32B0B8432A44838B00D69797 /* UIHelper.swift in Sources */,
 				325EE9772A423EF1000F342D /* SearchVC.swift in Sources */,
 				325EE9892A429158000F342D /* UIViewController+Ext.swift in Sources */,
+				321A93642A43C08D004667A0 /* User.swift in Sources */,
+				321A93602A43C055004667A0 /* NetworkManager.swift in Sources */,
 				325EE9812A427A51000F342D /* FollowersListVC.swift in Sources */,
+				321A936C2A43C1E8004667A0 /* GHAvatarImageView.swift in Sources */,
 				325EE97D2A4246BB000F342D /* GFButton.swift in Sources */,
 				325EE9632A423843000F342D /* AppDelegate.swift in Sources */,
 				325EE9872A428887000F342D /* GFAlertVC.swift in Sources */,
+				321A936A2A43C132004667A0 /* FollowerCell.swift in Sources */,
 				325EE97B2A424494000F342D /* GFTabBarController.swift in Sources */,
 				325EE9832A428524000F342D /* GFTitleLabel.swift in Sources */,
 				325EE9952A435732000F342D /* GFContainerView.swift in Sources */,
@@ -284,7 +345,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -338,7 +399,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

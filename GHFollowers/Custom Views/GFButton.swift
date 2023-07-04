@@ -7,6 +7,8 @@
 
 import UIKit
 
+var configurationButton = UIButton.Configuration.filled()
+
 class GFButton: UIButton {
     override init(frame: CGRect) { // bc I'm making a custom
         super.init(frame: frame)
@@ -19,15 +21,14 @@ class GFButton: UIButton {
     
     init(backgroundColor: UIColor, title: String){
         super.init(frame: .zero) // later
-        self.backgroundColor = backgroundColor
+        configurationButton.baseBackgroundColor = backgroundColor
         self.setTitle(title, for: .normal)
         configure()
     }
     
     private func configure() {
-        layer.cornerRadius = 10
-        titleLabel?.textColor = .white
-        titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        configuration = configurationButton
+        
         translatesAutoresizingMaskIntoConstraints = false
     }
     
