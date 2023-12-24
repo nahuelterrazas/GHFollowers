@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FollowersListVCDelegate: AnyObject {
+    func didRequestFollowers(for username: String)
+}
+
 class FollowersListVC: UIViewController {
     
     enum Section { case main }  //hashable by default
@@ -37,6 +41,12 @@ class FollowersListVC: UIViewController {
     func configureViewController() {
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc func addButtonTapped(){
     }
     
     func configureCollectionView() {
@@ -53,7 +63,7 @@ class FollowersListVC: UIViewController {
         searchController.searchBar.placeholder = "Search a user"
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
-        searchController.isActive = true
+        searchController.navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
     }
     
@@ -65,10 +75,16 @@ class FollowersListVC: UIViewController {
             case.success(let followersList):
                 if followersList.count < 99 {self.hasMoreFollowers = false}
                 self.followers.append(contentsOf: followersList)
+                if self.followers.isEmpty {
+                    let message = "This user doesn't have any followers. Go follow them 😀"
+                    DispatchQueue.main.async {
+                        self.showEmptyStateView(with: message, in: self.view)
+                    }
+                }
                 self.updateData(on: self.followers)
                 
             case.failure(let error):
-                self.presentGFAlertOnMainThread(title: "Error", message: error.rawValue, buttonTitle: "Return")
+                self.presentGFAlertAndPopVCOnMainThread(title: "Error", message: error.rawValue, buttonTitle: "Return")
             }
         }
     }
@@ -105,6 +121,15 @@ extension FollowersListVC: UICollectionViewDelegate {
             getFollowers(username: username, page: page)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let follower = (isSearching ? filteredFollowers : followers)[indexPath.item]
+        let userInfoVC = UserInfoVC()
+        userInfoVC.username = follower.login
+        userInfoVC.delegate = self // so that is listening to the userInfoVC
+        let navController = UINavigationController(rootViewController: userInfoVC)
+        present(navController, animated: true)
+    }
 }
 
 
@@ -120,4 +145,18 @@ extension FollowersListVC: UISearchResultsUpdating, UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) { isSearching = true }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) { isSearching = false }
+}
+
+extension FollowersListVC: FollowersListVCDelegate{
+    func didRequestFollowers(for username: String) {
+    
+        self.username = username
+        title = username
+        page = 1
+        followers.removeAll()
+        filteredFollowers.removeAll()
+        collectionView.setContentOffset(.zero, animated: true)
+        getFollowers(username: username, page: page)
+    }
+    
 }

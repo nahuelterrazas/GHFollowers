@@ -11,7 +11,6 @@ class GFTitleLabel: UILabel {
     
     override init(frame: CGRect) { // bc I'm making a custom
         super.init(frame: frame)
-        configure()
     }
     
     

@@ -10,7 +10,7 @@ import UIKit
 class SearchVC: UIViewController {
 
     let logoImageView = UIImageView()
-    let usernameTextField = GFTextField()
+    let usernameTextField = GFTextField(text: "Enter a username")
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get followers")
     
     var isUsernameEntered: Bool { return !usernameTextField.text!.isEmpty}
@@ -98,7 +98,6 @@ class SearchVC: UIViewController {
 
 extension SearchVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("Did tap Go")
         pushFollowersListVC()
         return true
     }
