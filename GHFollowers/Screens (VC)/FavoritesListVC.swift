@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesListVC: UIViewController {
+class FavoritesListVC: GFDataLoadingVC {
     
     let tableView = UITableView()
     var favorites: [Follower] = []
@@ -48,7 +48,7 @@ class FavoritesListVC: UIViewController {
             switch result {
             case .success(let favorites):
                 if favorites.isEmpty {
-                    self.showEmptyStateView(with: "There is no favorites yet\nAdd one in the Follower Screen", in: self.view)
+                    showEmptyStateView(with: "There is no favorites yet\nAdd one in the Follower Screen", in: self.view)
                 } else {
                     self.favorites = favorites
                     DispatchQueue.main.async {

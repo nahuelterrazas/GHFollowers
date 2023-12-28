@@ -11,7 +11,7 @@ protocol FollowersListVCDelegate: AnyObject {
     func didRequestFollowers(for username: String)
 }
 
-class FollowersListVC: UIViewController {
+class FollowersListVC: GFDataLoadingVC {
     
     enum Section { case main }  //hashable by default
     var username: String!
@@ -104,6 +104,7 @@ class FollowersListVC: UIViewController {
     
     
     func getFollowers(username: String, page: Int) {
+        showLoadingView()
         NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -118,7 +119,8 @@ class FollowersListVC: UIViewController {
                     }
                 }
                 self.updateData(on: self.followers)
-                
+                dismissLoadingView()
+                dismissLoadingView()
             case.failure(let error):
                 self.presentGFAlertAndPopVCOnMainThread(title: "Error", message: error.rawValue, buttonTitle: "Return")
             }
