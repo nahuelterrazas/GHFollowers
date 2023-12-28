@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices
 
-fileprivate var containerView: UIView!
+var containerView: UIView!
 
 extension UIViewController {
     func presentGFAlertOnMainThread(title: String, message: String, buttonTitle: String){
@@ -19,6 +19,7 @@ extension UIViewController {
             self.present(alertVC, animated: true)
         }
     }
+    
     
     func presentGFAlertAndPopVCOnMainThread(title: String, message: String, buttonTitle: String){
         DispatchQueue.main.async {
@@ -31,11 +32,13 @@ extension UIViewController {
         }
     }
 
+    
     func showEmptyStateView(with message: String, in view: UIView) {
         let emptyStateView = GFEmptyStateView(message: message)
         emptyStateView.frame = view.bounds
         view.addSubview(emptyStateView)
     }
+    
     
     func presentSafariVC(url: URL){
         let safariVC = SFSafariViewController(url: url)

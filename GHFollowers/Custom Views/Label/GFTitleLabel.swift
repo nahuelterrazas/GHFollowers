@@ -11,6 +11,7 @@ class GFTitleLabel: UILabel {
     
     override init(frame: CGRect) { // bc I'm making a custom
         super.init(frame: frame)
+        configure()
     }
     
     
@@ -19,11 +20,10 @@ class GFTitleLabel: UILabel {
     }
     
     
-    init(textAligment: NSTextAlignment, fontSize: CGFloat){
-        super.init(frame: .zero)
+    convenience init(textAligment: NSTextAlignment, fontSize: CGFloat){
+        self.init(frame: .zero)
         self.textAlignment = textAligment
         font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
-        configure()
     }
 
     

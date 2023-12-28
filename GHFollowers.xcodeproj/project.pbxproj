@@ -38,7 +38,6 @@
 		32FBAD962B34CCE90023DFDD /* GFRepoItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FBAD952B34CCE90023DFDD /* GFRepoItemVC.swift */; };
 		32FBAD982B3677990023DFDD /* GFFollowerItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FBAD972B3677990023DFDD /* GFFollowerItemVC.swift */; };
 		32FBAD9C2B367E3A0023DFDD /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FBAD9B2B367E3A0023DFDD /* Date+Ext.swift */; };
-		32FBAD9E2B367E710023DFDD /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FBAD9D2B367E710023DFDD /* String+Ext.swift */; };
 		32FBADA12B3690630023DFDD /* GFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FBADA02B3690630023DFDD /* GFEmptyStateView.swift */; };
 		32FBADA52B38984F0023DFDD /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FBADA42B38984F0023DFDD /* FavoritesCell.swift */; };
 		32FBADA72B38D5E50023DFDD /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FBADA62B38D5E50023DFDD /* PersistenceManager.swift */; };
@@ -78,7 +77,6 @@
 		32FBAD952B34CCE90023DFDD /* GFRepoItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFRepoItemVC.swift; sourceTree = "<group>"; };
 		32FBAD972B3677990023DFDD /* GFFollowerItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerItemVC.swift; sourceTree = "<group>"; };
 		32FBAD9B2B367E3A0023DFDD /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
-		32FBAD9D2B367E710023DFDD /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		32FBADA02B3690630023DFDD /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyStateView.swift; sourceTree = "<group>"; };
 		32FBADA42B38984F0023DFDD /* FavoritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
 		32FBADA62B38D5E50023DFDD /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
@@ -178,14 +176,14 @@
 		325EE98B2A42A18E000F342D /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				32C7E0E52B3DA8F100EA3AC5 /* ImageViews */,
+				32C7E0E42B3CEA0100EA3AC5 /* TabBarController */,
 				32FBAD9F2B36903E0023DFDD /* Views */,
-				32FBAD9A2B3678E70023DFDD /* ImageViews */,
 				321A93682A43C0D2004667A0 /* Cells */,
 				325EE98D2A42A21E000F342D /* View Controllers */,
 				32FBAD902B34BCCB0023DFDD /* TextFields */,
 				32FBAD8F2B34BCBF0023DFDD /* Buttons */,
 				32A09FFA2B0E6D1F00420431 /* Label */,
-				321A936B2A43C1E8004667A0 /* GHAvatarImageView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -195,7 +193,6 @@
 			children = (
 				325EE9882A429158000F342D /* UIViewController+Ext.swift */,
 				32FBAD9B2B367E3A0023DFDD /* Date+Ext.swift */,
-				32FBAD9D2B367E710023DFDD /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,7 +212,6 @@
 			children = (
 				325EE9622A423843000F342D /* AppDelegate.swift */,
 				325EE9642A423843000F342D /* SceneDelegate.swift */,
-				325EE97A2A424494000F342D /* GFTabBarController.swift */,
 				325EE96D2A423844000F342D /* LaunchScreen.storyboard */,
 				325EE96B2A423844000F342D /* Assets.xcassets */,
 			);
@@ -230,6 +226,22 @@
 				32A09FFC2B0E6D7100420431 /* GFSecondaryTitleLabel.swift */,
 			);
 			path = Label;
+			sourceTree = "<group>";
+		};
+		32C7E0E42B3CEA0100EA3AC5 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				325EE97A2A424494000F342D /* GFTabBarController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		32C7E0E52B3DA8F100EA3AC5 /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				321A936B2A43C1E8004667A0 /* GHAvatarImageView.swift */,
+			);
+			path = ImageViews;
 			sourceTree = "<group>";
 		};
 		32FBAD8F2B34BCBF0023DFDD /* Buttons */ = {
@@ -258,19 +270,12 @@
 			path = ItemInfoVCs;
 			sourceTree = "<group>";
 		};
-		32FBAD9A2B3678E70023DFDD /* ImageViews */ = {
-			isa = PBXGroup;
-			children = (
-				325EE9942A435732000F342D /* GFContainerView.swift */,
-				32FBAD912B34BD560023DFDD /* GFItemInfoView.swift */,
-			);
-			path = ImageViews;
-			sourceTree = "<group>";
-		};
 		32FBAD9F2B36903E0023DFDD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				325EE9942A435732000F342D /* GFContainerView.swift */,
 				32FBADA02B3690630023DFDD /* GFEmptyStateView.swift */,
+				32FBAD912B34BD560023DFDD /* GFItemInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -365,7 +370,6 @@
 				325EE9872A428887000F342D /* GFAlertVC.swift in Sources */,
 				321A936A2A43C132004667A0 /* FollowerCell.swift in Sources */,
 				325EE97B2A424494000F342D /* GFTabBarController.swift in Sources */,
-				32FBAD9E2B367E710023DFDD /* String+Ext.swift in Sources */,
 				32A09FF92B0E6C6100420431 /* GFUserInfoHeaderVC.swift in Sources */,
 				32FBAD942B34C8460023DFDD /* GFItemInfoVC.swift in Sources */,
 				32FBAD982B3677990023DFDD /* GFFollowerItemVC.swift in Sources */,
@@ -523,6 +527,7 @@
 				INFOPLIST_FILE = GHFollowers/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -550,6 +555,7 @@
 				INFOPLIST_FILE = GHFollowers/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -7,8 +7,6 @@
 
 import UIKit
 
-var configurationButton = UIButton.Configuration.filled()
-
 class GFButton: UIButton {
     override init(frame: CGRect) { // bc I'm making a custom
         super.init(frame: frame)
@@ -19,15 +17,14 @@ class GFButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(backgroundColor: UIColor, title: String){
-        super.init(frame: .zero) // later
-        configurationButton.baseBackgroundColor = backgroundColor
+    convenience init(backgroundColor: UIColor, title: String){
+        self.init(frame: .zero)
+        self.configuration?.baseBackgroundColor = backgroundColor
         self.setTitle(title, for: .normal)
-        configure()
     }
     
     private func configure() {
-        configuration = configurationButton
+        configuration = UIButton.Configuration.filled()
         
         translatesAutoresizingMaskIntoConstraints = false
     }

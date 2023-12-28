@@ -27,8 +27,9 @@ class SearchVC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)  // so that "title" will not appear after going back
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -37,9 +38,10 @@ class SearchVC: UIViewController {
 
     
     func createDismissKeyboardGesture() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
     }
+    
     
     @objc func pushFollowersListVC() {
         
@@ -48,9 +50,7 @@ class SearchVC: UIViewController {
             return
         }
         
-        let followersListVC = FollowersListVC()
-        followersListVC.username = usernameTextField.text
-        followersListVC.title = usernameTextField.text
+        let followersListVC = FollowersListVC(username: usernameTextField.text!)
         navigationController?.pushViewController(followersListVC, animated: true)
     }
 
@@ -58,7 +58,7 @@ class SearchVC: UIViewController {
     func configureLogoImageView() {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.image = UIImage(named: "gh-logo")
+        logoImageView.image = Images.ghLogo
         
         NSLayoutConstraint.activate([
         
@@ -68,6 +68,7 @@ class SearchVC: UIViewController {
             logoImageView.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
+    
     
     func configureTextField() {
         view.addSubview(usernameTextField)
@@ -81,6 +82,7 @@ class SearchVC: UIViewController {
         
         ])
     }
+    
     
     func configureButton() {
         view.addSubview(callToActionButton)

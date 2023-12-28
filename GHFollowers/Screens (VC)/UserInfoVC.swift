@@ -31,11 +31,13 @@ class UserInfoVC: UIViewController {
         getUserInfo()
     }
     
+    
     func configureViewController(){
         view.backgroundColor = .systemBackground
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         navigationItem.rightBarButtonItem = doneButton
     }
+    
     
     func getUserInfo(){
         NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
@@ -50,6 +52,7 @@ class UserInfoVC: UIViewController {
         }
     }
     
+    
     func configureUIElements(with user: User){
         let repoItemVC = GFRepoItemVC(user: user)
         repoItemVC.delegate = self
@@ -60,8 +63,9 @@ class UserInfoVC: UIViewController {
         self.add(childVC: repoItemVC, to: self.itemViewOne)
         self.add(childVC: followerItemVC, to: self.itemViewTwo)
         self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
-        self.dateLabel.text = "GitHub since \(user.createdAt.convertToDisplayFormat())"
+        self.dateLabel.text = "GitHub since \(user.createdAt.convertToMonthYearFormat())"
     }
+    
     
     func layoutUI(){
         viewList.append(contentsOf: [headerView, itemViewOne, itemViewTwo, dateLabel])
@@ -95,6 +99,7 @@ class UserInfoVC: UIViewController {
         ])
     }
     
+    
     func add(childVC: UIViewController, to containerView: UIView){
         addChild(childVC)
         containerView.addSubview(childVC.view)
@@ -102,11 +107,12 @@ class UserInfoVC: UIViewController {
         childVC.didMove(toParent: self)
     }
     
+    
     @objc func dismissVC(){
         dismiss(animated: true)
     }
-
 }
+
 
 extension UserInfoVC: UserInfoVCDelegate{
     func didTapGetFollowers(for user: User) {
@@ -126,7 +132,4 @@ extension UserInfoVC: UserInfoVCDelegate{
         
         presentSafariVC(url: url)
     }
-    
-    
-    
 }

@@ -13,7 +13,7 @@ class NetworkManager {
     private let baseUrl = "https://api.github.com/users"
     let cache = NSCache<NSString, UIImage>()
     
-    private init() {} // only instance
+    private init() {}
 
     
     func getFollowers(for username: String, page: Int, completed: @escaping (Result<[Follower], GFError>) -> Void) {
@@ -52,7 +52,7 @@ class NetworkManager {
             }
         }
         
-        task.resume() // starts networkCall
+        task.resume()
     }
     
     
@@ -84,11 +84,43 @@ class NetworkManager {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.dateDecodingStrategy = .iso8601
                 let user = try decoder.decode(User.self, from: data)
                 completed(.success(user))
             } catch {
                 completed(.failure(.invalidData))
             }
+        }
+        
+        task.resume()
+    }
+    
+    
+    func downloadImage(from url: String, completed: @escaping(UIImage?) -> Void){
+        let cacheKey = NSString(string: url)
+        
+        if let image = cache.object(forKey: cacheKey) {
+            completed(image)
+            return
+        }
+        
+        guard let url = URL(string: url) else {
+            completed(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let   self = self,
+                        error == nil,
+                  let   response = response as? HTTPURLResponse, response.statusCode == 200,
+                  let   data = data,
+                  let   image = UIImage(data: data) else {
+                completed(nil)
+                return
+            }
+
+            self.cache.setObject(image, forKey: cacheKey)
+            completed(image)
         }
         
         task.resume()

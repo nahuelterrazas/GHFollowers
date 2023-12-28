@@ -8,8 +8,8 @@
 import UIKit
 
 class FollowerCell: UICollectionViewCell {
-    static let reuseID = "FollowerCell"
     
+    static let reuseID = "FollowerCell"
     let avatarImage = GFAvatarImageView(frame: .zero)
     let usernameLabel = GFTitleLabel(textAligment: .center, fontSize: 16)
     
@@ -18,13 +18,20 @@ class FollowerCell: UICollectionViewCell {
         configure()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func set(follower: Follower){
         usernameLabel.text = follower.login
-        avatarImage.downloadImage(from: follower.avatarUrl)
+        NetworkManager.shared.downloadImage(from: follower.avatarUrl) { [weak self] image in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.avatarImage.image = image
+            }
+        }
     }
     
     
@@ -46,6 +53,7 @@ class FollowerCell: UICollectionViewCell {
             usernameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()

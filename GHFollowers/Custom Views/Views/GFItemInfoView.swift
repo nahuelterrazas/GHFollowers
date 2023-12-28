@@ -22,9 +22,11 @@ class GFItemInfoView: UIView {
         configure()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     private func configure(){
         addSubview(symbolImageView)
@@ -53,6 +55,7 @@ class GFItemInfoView: UIView {
             countLabel.heightAnchor.constraint(equalToConstant: 18)
         ])
     }
+    
     
     func set(itemInfoType: ItemInfoType, withCount count: Int) {
         switch itemInfoType {

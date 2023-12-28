@@ -27,13 +27,15 @@ class GFAlertVC: UIViewController {
         self.buttonTitle = buttonTitle
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         configureContainerView()
         configureTitleLabel()
         configureActionButton()
@@ -78,6 +80,7 @@ class GFAlertVC: UIViewController {
         ])
     }
     
+    
     func configureMessageLabel(){
         containerView.addSubview(messageLabel)
         messageLabel.text = message ?? "Unable to complete request"
@@ -90,6 +93,7 @@ class GFAlertVC: UIViewController {
             messageLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -12)
         ])
     }
+    
     
     @objc func dismissVC() {
         dismiss(animated: true)

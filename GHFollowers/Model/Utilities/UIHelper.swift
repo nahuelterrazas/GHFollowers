@@ -20,7 +20,5 @@ struct UIHelper {
         flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth+35)
         
         return flowLayout
-        
     }
-
 }

@@ -20,10 +20,9 @@ class GFBodyLabel: UILabel {
     }
     
     
-    init(textAligment: NSTextAlignment){
-        super.init(frame: .zero)
+    convenience init(textAligment: NSTextAlignment){
+        self.init(frame: .zero)
         self.textAlignment = textAligment
-        configure()
     }
     
     
@@ -35,6 +34,4 @@ class GFBodyLabel: UILabel {
         lineBreakMode = .byWordWrapping
         translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    
 }
