@@ -36,8 +36,7 @@ class FavoritesCell: UITableViewCell {
     
     
     private func configure(){
-        addSubview(avatarImage)
-        addSubview(usernameLabel)
+        addSubviews(avatarImage, usernameLabel)
         
         accessoryType = .disclosureIndicator
         let padding: CGFloat = 12
@@ -59,7 +58,7 @@ class FavoritesCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.avatarImage.image = UIImage(named: "avatar-placeholder")
+        self.avatarImage.image = Images.placeholder
         self.usernameLabel.text = ""
     }
 }

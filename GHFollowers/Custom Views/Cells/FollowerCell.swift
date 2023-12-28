@@ -36,8 +36,7 @@ class FollowerCell: UICollectionViewCell {
     
     
     private func configure(){
-        addSubview(avatarImage)
-        addSubview(usernameLabel)
+        addSubviews(avatarImage, usernameLabel)
         
         let padding: CGFloat = 8
         
@@ -57,7 +56,7 @@ class FollowerCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.avatarImage.image = UIImage(named: "avatar-placeholder")
+        self.avatarImage.image = Images.placeholder
         self.usernameLabel.text = ""
     }
 }

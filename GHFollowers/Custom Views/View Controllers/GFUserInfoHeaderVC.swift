@@ -15,9 +15,7 @@ class GFUserInfoHeaderVC: UIViewController {
     let locationImageView = UIImageView()
     let locationLabel = GFSecondaryTitleLabel(fontSize: 18)
     let bioLabel = GFBodyLabel(textAligment: .left)
-    
-    var elements: [UIView] = []
-        
+            
     var user: User!
     
     init(user: User) {
@@ -47,7 +45,7 @@ class GFUserInfoHeaderVC: UIViewController {
         bioLabel.text = user.bio ?? "No bio available"
         bioLabel.numberOfLines = 3
         
-        locationImageView.image = UIImage(systemName: SFSymbols.location)
+        locationImageView.image = SFSymbols.location
         locationImageView.tintColor = .secondaryLabel
     }
     
@@ -55,19 +53,13 @@ class GFUserInfoHeaderVC: UIViewController {
     func downloadAvatarImage(){
         NetworkManager.shared.downloadImage(from: user.avatarUrl) { [weak self] image in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.avatarImageView.image = image
-            }
+            DispatchQueue.main.async { self.avatarImageView.image = image }
         }
     }
     
     
     func addSubview(){
-        elements = [avatarImageView, usernameLabel, nameLabel, locationLabel, locationImageView, bioLabel]
-        
-        for element in elements {
-            view.addSubview(element)
-        }
+        view.addSubviews(avatarImageView, usernameLabel, nameLabel, locationLabel, locationImageView, bioLabel)
     }
     
     
@@ -105,7 +97,7 @@ class GFUserInfoHeaderVC: UIViewController {
             bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: textImagePadding),
             bioLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bioLabel.heightAnchor.constraint(equalToConstant: 60)
+            bioLabel.heightAnchor.constraint(equalToConstant: 90)
         ])
     }
 }

@@ -26,12 +26,11 @@ class FollowersListVC: GFDataLoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureViewController()
         configureCollectionView()
         getFollowers(username: username, page: page)
         configureDataSource()
-        confiureSearchController()
+        configureSearchController()
     }
     
     
@@ -48,6 +47,7 @@ class FollowersListVC: GFDataLoadingVC {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -93,12 +93,11 @@ class FollowersListVC: GFDataLoadingVC {
     }
     
     
-    func confiureSearchController() {
+    func configureSearchController() {
         let searchController = UISearchController()
         searchController.searchBar.placeholder = "Search a user"
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
-        searchController.navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
     }
     
@@ -119,7 +118,6 @@ class FollowersListVC: GFDataLoadingVC {
                     }
                 }
                 self.updateData(on: self.followers)
-                dismissLoadingView()
                 dismissLoadingView()
             case.failure(let error):
                 self.presentGFAlertAndPopVCOnMainThread(title: "Error", message: error.rawValue, buttonTitle: "Return")
@@ -182,7 +180,7 @@ extension FollowersListVC: UISearchResultsUpdating, UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) { isSearching = true }
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) { isSearching = false }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) { isSearching = false }
 }
 
 
@@ -194,7 +192,7 @@ extension FollowersListVC: FollowersListVCDelegate{
         page = 1
         followers.removeAll()
         filteredFollowers.removeAll()
-        collectionView.setContentOffset(.zero, animated: true)
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: true)
         getFollowers(username: username, page: page)
     }
 }
