@@ -25,19 +25,18 @@ class FavoritesListVC: GFDataLoadingVC {
 
     
     func configureVC(){
-        view.backgroundColor = .systemBackground
         title = "Favorites"
+        view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     
     func configureTableView() {
         view.addSubview(tableView)
-        tableView.frame = view.bounds
-        tableView.rowHeight = 80
-        tableView.delegate = self
+        tableView.frame      = view.bounds
+        tableView.rowHeight  = 80
+        tableView.delegate   = self
         tableView.dataSource = self
-        
         tableView.register(FavoritesCell.self, forCellReuseIdentifier: FavoritesCell.reuseID)
     }
     
@@ -47,17 +46,22 @@ class FavoritesListVC: GFDataLoadingVC {
             guard let self = self else { return }
             switch result {
             case .success(let favorites):
-                if favorites.isEmpty {
-                    showEmptyStateView(with: "There is no favorites yet\nAdd one in the Follower Screen", in: self.view)
-                } else {
-                    self.favorites = favorites
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.view.bringSubviewToFront(self.tableView)
-                    }
-                }
+                
+                updateUI(with: favorites)
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+            }
+        }
+    }
+    
+    func updateUI(with favorites: [Follower]){
+        if favorites.isEmpty {
+            showEmptyStateView(with: "There is no favorites yet\nAdd one in the Follower Screen", in: self.view)
+        } else {
+            DispatchQueue.main.async {
+                self.favorites = favorites
+                self.tableView.reloadData()
+                self.view.bringSubviewToFront(self.tableView)
             }
         }
     }

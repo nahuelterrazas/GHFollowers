@@ -9,14 +9,15 @@ import UIKit
 
 class GFUserInfoHeaderVC: UIViewController {
     
-    let avatarImageView = GFAvatarImageView(frame: .zero)
-    let usernameLabel = GFTitleLabel(textAligment: .left, fontSize: 34)
-    let nameLabel = GFSecondaryTitleLabel(fontSize: 18)
+    let avatarImageView   = GFAvatarImageView(frame: .zero)
+    let usernameLabel     = GFTitleLabel(textAligment: .left, fontSize: 34)
+    let nameLabel         = GFSecondaryTitleLabel(fontSize: 18)
     let locationImageView = UIImageView()
-    let locationLabel = GFSecondaryTitleLabel(fontSize: 18)
-    let bioLabel = GFBodyLabel(textAligment: .left)
+    let locationLabel     = GFSecondaryTitleLabel(fontSize: 18)
+    let bioLabel          = GFBodyLabel(textAligment: .left)
             
     var user: User!
+    
     
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
@@ -31,35 +32,22 @@ class GFUserInfoHeaderVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSubview()
+        view.addSubviews(avatarImageView, usernameLabel, nameLabel, locationLabel, locationImageView, bioLabel)
         layout()
         configureUIElements()
     }
     
     
     func configureUIElements() {
-        downloadAvatarImage()
-        usernameLabel.text = user.login
-        nameLabel.text = user.name ?? ""
-        locationLabel.text = user.location ?? "No Location"
-        bioLabel.text = user.bio ?? "No bio available"
+        avatarImageView.downloadImage(fromURL: user.avatarUrl)
+        usernameLabel.text     = user.login
+        nameLabel.text         = user.name ?? ""
+        locationLabel.text     = user.location ?? "No Location"
+        bioLabel.text          = user.bio ?? "No bio available"
         bioLabel.numberOfLines = 3
         
         locationImageView.image = SFSymbols.location
         locationImageView.tintColor = .secondaryLabel
-    }
-    
-    
-    func downloadAvatarImage(){
-        NetworkManager.shared.downloadImage(from: user.avatarUrl) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async { self.avatarImageView.image = image }
-        }
-    }
-    
-    
-    func addSubview(){
-        view.addSubviews(avatarImageView, usernameLabel, nameLabel, locationLabel, locationImageView, bioLabel)
     }
     
     

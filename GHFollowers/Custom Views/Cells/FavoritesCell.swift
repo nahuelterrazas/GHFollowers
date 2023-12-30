@@ -10,8 +10,8 @@ import UIKit
 class FavoritesCell: UITableViewCell {
 
     static let reuseID = "FavoritesCell"
-    let avatarImage = GFAvatarImageView(frame: .zero)
-    let usernameLabel = GFTitleLabel(textAligment: .left, fontSize: 26)
+    let avatarImage    = GFAvatarImageView(frame: .zero)
+    let usernameLabel  = GFTitleLabel(textAligment: .left, fontSize: 26)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,18 +26,12 @@ class FavoritesCell: UITableViewCell {
     
     func set(favorite: Follower){
         usernameLabel.text = favorite.login
-        NetworkManager.shared.downloadImage(from: favorite.avatarUrl) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.avatarImage.image = image
-            }
-        }
+        avatarImage.downloadImage(fromURL: favorite.avatarUrl)
     }
     
     
     private func configure(){
         addSubviews(avatarImage, usernameLabel)
-        
         accessoryType = .disclosureIndicator
         let padding: CGFloat = 12
         
@@ -58,7 +52,7 @@ class FavoritesCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.avatarImage.image = Images.placeholder
+        self.avatarImage.image  = Images.placeholder
         self.usernameLabel.text = ""
     }
 }

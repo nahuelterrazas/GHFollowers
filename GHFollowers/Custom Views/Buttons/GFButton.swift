@@ -8,12 +8,13 @@
 import UIKit
 
 class GFButton: UIButton {
-    override init(frame: CGRect) { // bc I'm making a custom
+    
+    override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
     
-    required init?(coder: NSCoder) { // no storyboard, no worries
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -25,7 +26,6 @@ class GFButton: UIButton {
     
     private func configure() {
         configuration = UIButton.Configuration.filled()
-        
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -33,6 +33,4 @@ class GFButton: UIButton {
         self.configuration?.baseBackgroundColor = backgroundColor
         setTitle(title, for: .normal)
     }
-    
-    
 }

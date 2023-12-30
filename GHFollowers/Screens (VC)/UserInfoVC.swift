@@ -13,10 +13,10 @@ protocol UserInfoVCDelegate: AnyObject {
 
 class UserInfoVC: UIViewController {
     
-    let headerView = UIView()
+    let headerView  = UIView()
     let itemViewOne = UIView()
     let itemViewTwo = UIView()
-    let dateLabel = GFBodyLabel(textAligment: .center)
+    let dateLabel   = GFBodyLabel(textAligment: .center)
     var viewList: [UIView] = []
     
     var username: String!
@@ -32,8 +32,8 @@ class UserInfoVC: UIViewController {
     
     
     func configureViewController(){
-        view.backgroundColor = .systemBackground
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        view.backgroundColor              = .systemBackground
+        let doneButton                    = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         navigationItem.rightBarButtonItem = doneButton
     }
     
@@ -63,7 +63,7 @@ class UserInfoVC: UIViewController {
     func layoutUI(){
         viewList.append(contentsOf: [headerView, itemViewOne, itemViewTwo, dateLabel])
 
-        let padding: CGFloat = 20
+        let padding: CGFloat    = 20
         let itemHeight: CGFloat = 140
         
         for view in viewList {
