@@ -10,7 +10,7 @@ import UIKit
 
 class FollowersListVC: GFDataLoadingVC {
     
-    enum Section { case main }  //hashable by default
+    enum Section { case main }
     var username: String!
     var followers: [Follower]         = []
     var filteredFollowers: [Follower] = []
@@ -60,15 +60,15 @@ class FollowersListVC: GFDataLoadingVC {
     
     
     @objc func addButtonTapped(){
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let user):
-                self.addToFavorites(user: user)
-                
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "something went wrong", message: error.rawValue, buttonTitle: "Ok")
+        showLoadingView()
+        Task {
+            guard let user = try? await NetworkManager.shared.getUserInfo(for: username) else {
+                presentDefaultError()
+                dismissLoadingView()
+                return
             }
+            addToFavorites(user: user)
+            dismissLoadingView()
         }
     }
     
@@ -79,11 +79,14 @@ class FollowersListVC: GFDataLoadingVC {
         PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
             guard let self = self else { return }
             guard let error = error else {
-                self.presentGFAlertOnMainThread(title: "Success", message: "You have successfully favorited this user", buttonTitle: "Ok")
+                DispatchQueue.main.async {
+                    self.presentGFAlert(title: "Success", message: "You have successfully favorited this user", buttonTitle: "Ok")
+                }
                 return
             }
-            
-            self.presentGFAlertOnMainThread(title: "something went wrong", message: error.rawValue, buttonTitle: "Ok")
+            DispatchQueue.main.async {
+                self.presentGFAlert(title: "something went wrong", message: error.rawValue, buttonTitle: "Ok")
+            }
         }
     }
     
@@ -108,17 +111,19 @@ class FollowersListVC: GFDataLoadingVC {
     
     func getFollowers(username: String, page: Int) {
         showLoadingView()
-        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-                
-            case.success(let followers):
-                
-               updateUI(with: followers)
+        Task{
+            do{
+                let followers = try await NetworkManager.shared.getFollowers(for: username, page: page)
+                updateUI(with: followers)
                 self.updateData(on: self.followers)
                 dismissLoadingView()
-            case.failure(let error):
-                self.presentGFAlertAndPopVCOnMainThread(title: "Error", message: error.rawValue, buttonTitle: "Return")
+            } catch {
+                if let gfError = error as? GFError {
+                    self.presentGFAlertAndPopVCOnMainThread(title: "Error", message: gfError.rawValue, buttonTitle: "Return")
+                } else {
+                    presentDefaultError()
+                }
+                dismissLoadingView()
             }
         }
     }
@@ -172,7 +177,7 @@ extension FollowersListVC: UICollectionViewDelegate {
         let follower        = (isSearching ? filteredFollowers : followers)[indexPath.item]
         let userInfoVC      = UserInfoVC()
         userInfoVC.username = follower.login
-        userInfoVC.delegate = self // so that is listening to the userInfoVC
+        userInfoVC.delegate = self
         let navController   = UINavigationController(rootViewController: userInfoVC)
         present(navController, animated: true)
     }

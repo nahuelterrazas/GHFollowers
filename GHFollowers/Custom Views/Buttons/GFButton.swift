@@ -25,7 +25,8 @@ class GFButton: UIButton {
     }
     
     private func configure() {
-        configuration = UIButton.Configuration.filled()
+        configuration = .filled()
+        configuration?.cornerStyle = .medium
         translatesAutoresizingMaskIntoConstraints = false
     }
     

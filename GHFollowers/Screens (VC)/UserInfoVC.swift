@@ -11,7 +11,7 @@ protocol UserInfoVCDelegate: AnyObject {
     func didRequestFollowers(for username: String)
 }
 
-class UserInfoVC: UIViewController {
+class UserInfoVC: GFDataLoadingVC {
     
     let headerView  = UIView()
     let itemViewOne = UIView()
@@ -38,15 +38,19 @@ class UserInfoVC: UIViewController {
     }
     
     
-    func getUserInfo(){
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let user):
-                DispatchQueue.main.sync { self.configureUIElements(with: user) }
-
-            case .failure(let failure):
-                self.presentGFAlertOnMainThread(title: "Oops", message: failure.rawValue, buttonTitle: "Cancel")
+    func getUserInfo() {
+        showLoadingView()
+        
+        Task {
+            do {
+                let followers = try await NetworkManager.shared.getUserInfo(for: username)
+                configureUIElements(with: followers)
+                dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(title: "Oops", message: gfError.rawValue, buttonTitle: "Cancel")
+                    dismissLoadingView()
+                }
             }
         }
     }
@@ -110,7 +114,7 @@ class UserInfoVC: UIViewController {
 extension UserInfoVC: GFFollowerItemVCDelegate{
     func didTapGetFollowers(for user: User) {
         guard user.followers != 0 else {
-            presentGFAlertOnMainThread(title: "No followers", message: "This user has no followers. What a shame 🥺", buttonTitle: "So sad")  
+            self.presentGFAlert(title: "No followers", message: "This user has no followers. What a shame 🥺", buttonTitle: "So sad")
             return
         }
         delegate.didRequestFollowers(for: user.login)
@@ -121,10 +125,9 @@ extension UserInfoVC: GFFollowerItemVCDelegate{
 extension UserInfoVC: GFRepoItemVCDelegate{
     func didTapGitHubProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {
-            presentGFAlertOnMainThread(title: "Invalid URL", message: "The url attached to this user is invalid", buttonTitle: "Ok")
+            self.presentGFAlert(title: "Invalid URL", message: "The url attached to this user is invalid", buttonTitle: "Ok")
             return
         }
-        
         presentSafariVC(url: url)
     }
 }
